@@ -10,7 +10,7 @@ function Table({ data }) {
   ))
   let rows = data.rows.map((row, index) => (
     <tr key={index}>
-      {row.map((cell, cellIndex) => (
+      {row.map((cell, cellIndex: number) => (
         <td key={cellIndex}>{cell}</td>
       ))}
     </tr>
