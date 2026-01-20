@@ -1,10 +1,11 @@
 import { BlogPosts } from 'app/components/posts'
+import { TITLE } from './constants'
 
 export default function Page() {
   return (
     <section>
       <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
-        My Portfolio
+        {TITLE}
       </h1>
       <p className="mb-4">
         {`I'm a Vim enthusiast and tab advocate, finding unmatched efficiency in
