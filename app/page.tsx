@@ -1,5 +1,5 @@
-import { BlogPosts } from 'app/components/posts'
-import { TITLE } from './constants'
+import { BlogPosts } from '@/components/posts'
+import { TITLE } from '../constants'
 
 export default function Page() {
   return (

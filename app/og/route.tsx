@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og'
-import { TITLE } from '../constants'
+import { TITLE } from '../../constants'
 
 export function GET(request: Request) {
   let url = new URL(request.url)
