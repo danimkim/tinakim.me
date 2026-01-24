@@ -16,7 +16,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                         src={project.image || "/placeholder.svg"}
                         alt={project.title}
                         fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105 grayscale"
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                 </div>
                 <div className="p-6">

@@ -29,98 +29,119 @@ Key features include:
 The design philosophy focuses on content-first approach, letting the work speak for itself without unnecessary visual distractions.`,
   },
   {
-    slug: 'task-management-app',
-    title: 'Task Management App',
+    slug: 'alacarte-mall',
+    title: 'Alacarte Mall',
     description:
-      'A productivity application for managing daily tasks with drag-and-drop functionality and real-time sync.',
-    date: 'December 2025',
-    tags: ['React', 'Node.js', 'PostgreSQL'],
-    image: '/images/task-management.jpg',
-    content: `A full-stack task management application designed to help users organize their daily workflows efficiently.
+      'A modern e-commerce platform for premium coffee machine brands featuring membership system and personalized shopping experience.',
+    date: 'January 2023 - June 2023',
+    tags: ['Next.js', 'TypeScript', 'Emotion', 'React Query'],
+    image: '/images/alacarte-mall.png',
+    content: `An e-commerce website for a premium coffee machine brand, built with Next.js and TypeScript. The project focused on delivering a seamless shopping experience with modern web technologies and performance optimization.
 
-The application features:
-- Intuitive drag-and-drop interface for task organization
-- Real-time synchronization across devices
-- Project and workspace management
-- Due date tracking and reminders
-- Collaborative features for team projects
+Key features include:
+- Product catalog with pagination and advanced filtering
+- Comprehensive shopping cart and checkout system
+- Membership tier system with exclusive benefits and coupon distribution
+- Wishlist functionality and product inquiry system
+- Customer review management
+- Sticky CTA bar on product detail pages for better conversion
+- Fully responsive design across all devices
 
-Built with a React frontend and Node.js backend, utilizing PostgreSQL for reliable data persistence and WebSocket connections for real-time updates.`,
+The project emphasized performance optimization and smooth user interactions. Implemented infinite scroll and infinite pagination using React Query, which provided valuable experience in working with official documentation and understanding advanced data fetching patterns.
+
+The design approach was minimal and modern, allowing the premium coffee machines to take center stage while maintaining excellent usability.`,
   },
   {
-    slug: 'weather-dashboard',
-    title: 'Weather Dashboard',
+    slug: 'alacarte-mall-admin',
+    title: 'Alacarte Mall Admin',
     description:
-      'A beautiful weather application that displays current conditions and forecasts with animated visualizations.',
-    date: 'November 2025',
-    tags: ['Vue.js', 'D3.js', 'Weather API'],
-    image: '/images/weather-dashboard.jpg',
-    content: `An elegant weather dashboard that provides comprehensive weather information with stunning visual representations.
+      'A full-stack admin dashboard for managing e-commerce operations including products, orders, memberships, and automated membership tier management and benefits distribution.',
+    date: 'January 2023 - August 2023',
+    tags: ['Next.js', 'TypeScript', 'Emotion', 'Chart.js', 'Nest.js', 'MSSQL'],
+    image: '/images/alacarte-mall-admin.jpg',
+    content: `A full-stack admin dashboard built for managing the Alacarte Mall e-commerce platform. The project involved both frontend development and backend API development, handling complex business operations including product management, order processing, and automated membership benefits distribution.
 
-Features include:
-- Current weather conditions with animated icons
-- 7-day forecast with detailed breakdowns
-- Interactive charts showing temperature trends
-- Location-based weather detection
-- Multiple unit support (Celsius/Fahrenheit)
+Key features include:
+- Comprehensive product, order, and customer management system
+- Membership tier and coupon management with automated distribution
+- Customer inquiry and review moderation
+- Interactive analytics dashboard with Chart.js visualizations
+- Batch processing for monthly membership data updates
+- Excel import/export functionality for bulk operations
+- Role-based access control
+- RESTful API development with Nest.js and MSSQL database
 
-The visualization layer is powered by D3.js, creating smooth animations that make checking the weather a delightful experience.`,
+The project's highlight was developing a reusable member list component for coupon distribution. This component featured advanced search, filtering, and pagination capabilities while managing complex state with nested user data. The component was designed to be modular and reusable across different pages in the admin system.
+
+Through code reviews and pair programming with team members, I learned the importance of seeking help when facing development bottlenecks rather than spending too much time stuck on complex problems. This collaborative approach was crucial in managing the intricate state management required for handling large datasets and multiple user interactions simultaneously. Working on both frontend and backend provided valuable experience in full-stack development and understanding the complete data flow.`,
   },
   {
-    slug: 'e-commerce-platform',
-    title: 'E-commerce Platform',
+    slug: 'hli-corporate-website',
+    title: 'HLI Corporate Website',
     description:
-      'A modern online shopping platform with cart management, payment integration, and order tracking.',
-    date: 'October 2025',
-    tags: ['Next.js', 'Stripe', 'Supabase'],
-    image: '/images/ecommerce-platform.jpg',
-    content: `A comprehensive e-commerce solution built for small to medium-sized businesses looking to establish their online presence.
+      'A modern corporate website for HLI, a brand development company, featuring multi-language support and responsive design across multiple breakpoints.',
+    date: 'June 2023 - July 2023',
+    tags: ['Next.js', 'TypeScript', 'Emotion', 'i18n'],
+    image: '/images/hli-corporate.jpg',
+    content: `A corporate website for HLI, a brand development company specializing in launching and growing premium brands in the Korean market. The site showcases the company's portfolio of brands including Alacarte, Jura, and Caso Design.
 
-Core functionality includes:
-- Product catalog with search and filtering
-- Shopping cart with persistent storage
-- Secure checkout with Stripe integration
-- Order history and tracking
-- Admin dashboard for inventory management
+Key features include:
+- Comprehensive company introduction and values presentation
+- People & Culture section featuring job roles, office spaces, benefits, and CSR activities
+- Business solutions showcase (Brand Navigator, Sales, Customer Management)
+- Brand portfolio presentation
+- News, partnership inquiries, recruitment, and contact sections
+- Multi-language support using i18n for global accessibility
+- Smooth animations and interactive elements throughout the site
+- Integrated admin panel managed through Alacarte Mall admin system
 
-The platform prioritizes user experience with fast page loads, intuitive navigation, and a seamless checkout process.`,
+The project presented significant challenges in responsive design implementation, particularly managing layout transitions across breakpoints where the design structure fundamentally changed between desktop, tablet, and mobile views. This required extensive communication with the design team to clarify ambiguous specifications in Figma mockups, strengthening cross-functional collaboration skills.
+
+Implementing i18n for multi-language support provided valuable experience in internationalization, while working through complex responsive layout challenges deepened understanding of adaptive design principles and the importance of clear design-development communication.`,
   },
   {
-    slug: 'markdown-editor',
-    title: 'Markdown Editor',
+    slug: 'little-lemon-restaurant',
+    title: 'Little Lemon Restaurant',
     description:
-      'A distraction-free writing tool with live preview, syntax highlighting, and export capabilities.',
-    date: 'September 2025',
-    tags: ['TypeScript', 'CodeMirror', 'Electron'],
-    image: '/images/markdown-editor.jpg',
-    content: `A focused writing environment for developers and content creators who work with Markdown daily.
+      'A restaurant website with table reservation system built with React and TypeScript, showcasing UI development skills and semantic HTML practices.',
+    date: 'September 2024',
+    tags: ['React', 'TypeScript', 'Emotion', 'Figma'],
+    image: '/images/little-lemon.jpg',
+    content: `A restaurant website developed as part of a Coursera course, demonstrating proficiency in modern React development and UI implementation. The project features a complete table reservation system with an intuitive user interface.
 
-Key features:
-- Split-pane editor with live preview
-- Syntax highlighting for code blocks
-- Export to HTML, PDF, and various formats
-- Custom themes and font settings
-- Keyboard shortcuts for common operations
+Key features include:
+- Interactive reservation system with date, time, and party size selection
+- Reservation confirmation and management
+- Restaurant menu showcase
+- About page highlighting the restaurant's story
+- Responsive design optimized for all devices
+- Semantic HTML markup for better accessibility and SEO
 
-Built as a desktop application using Electron, ensuring a native-like experience across Windows, macOS, and Linux.`,
+The project provided valuable hands-on experience in UI/UX design workflow, starting from wireframing in Figma to implementation. Emphasis was placed on writing semantic HTML markup to improve code quality, accessibility, and maintainability.
+
+This is a work-in-progress project with potential for future enhancements such as advanced features, backend integration, and additional user-facing functionality.`,
   },
   {
-    slug: 'api-monitoring-tool',
-    title: 'API Monitoring Tool',
+    slug: 'no-more-bookmarks',
+    title: 'No More Bookmarks',
     description:
-      'A developer tool for monitoring API health, response times, and uptime with alerting capabilities.',
-    date: 'August 2025',
-    tags: ['Go', 'Redis', 'Grafana'],
-    image: '/images/api-monitoring.jpg',
-    content: `A robust monitoring solution designed to keep track of API performance and availability.
+      'A personal productivity web app that transforms bookmark collectors into action takers by turning saved social media inspiration into documented real-world experiences.',
+    date: 'June 2025 - Present',
+    tags: ['Next.js', 'TypeScript', 'Supabase'],
+    image: '/images/no-more-bookmarks.jpg',
+    content: `A personal project born from the frustration of endlessly saving travel posts and recipes from Instagram and YouTube without ever actually experiencing them. This web app encourages users to move beyond passive bookmarking and start creating real-world memories.
 
-Monitoring capabilities:
-- Endpoint health checks at configurable intervals
-- Response time tracking and historical data
-- Custom alerting via email, Slack, and webhooks
-- Dashboard with real-time metrics
-- Status page generation for public communication
+Key features include:
+- Bookmark management by saving social media content URLs
+- Experience documentation with text entries and photo attachments
+- Category organization for different types of activities
+- Personal dashboard for tracking progress and growth
+- Image upload and storage via Supabase
+- Email-based authentication system
+- Privacy-focused design with personal experience tracking
 
-The backend is written in Go for performance, with Redis handling real-time data and Grafana providing visualization dashboards.`,
+Currently implemented features focus on core functionality: saving bookmarks, documenting experiences with text and images, and organizing them by categories. The platform is designed primarily for personal use, allowing users to measure their growth and track how many saved inspirations they've turned into actual experiences.
+
+This ongoing project has provided valuable hands-on experience with Supabase for backend services and database management. Future enhancements include GDPR compliance implementation, social media API integration for seamless bookmark importing, and optional sharing features for users who want to share their experiences with others.`,
   },
 ];
