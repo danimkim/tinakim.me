@@ -82,20 +82,18 @@ Through code reviews and pair programming with team members, I learned the impor
       'A modern corporate website for HLI, a brand development company, featuring multi-language support and responsive design across multiple breakpoints.',
     date: 'June 2023 - July 2023',
     tags: ['Next.js', 'TypeScript', 'Emotion', 'i18n'],
-    image: '/images/hli-corporate.jpg',
+    image: '/images/hli.png',
     content: `A corporate website for HLI, a brand development company specializing in launching and growing premium brands in the Korean market. The site showcases the company's portfolio of brands including Alacarte, Jura, and Caso Design.
 
 Key features include:
 - Comprehensive company introduction and values presentation
-- People & Culture section featuring job roles, office spaces, benefits, and CSR activities
-- Business solutions showcase (Brand Navigator, Sales, Customer Management)
 - Brand portfolio presentation
 - News, partnership inquiries, recruitment, and contact sections
 - Multi-language support using i18n for global accessibility
 - Smooth animations and interactive elements throughout the site
 - Integrated admin panel managed through Alacarte Mall admin system
 
-The project presented significant challenges in responsive design implementation, particularly managing layout transitions across breakpoints where the design structure fundamentally changed between desktop, tablet, and mobile views. This required extensive communication with the design team to clarify ambiguous specifications in Figma mockups, strengthening cross-functional collaboration skills.
+The project presented significant challenges in responsive design implementation, particularly managing layout transitions across breakpoints where the design structure fundamentally changed between desktop, tablet, and mobile views.
 
 Implementing i18n for multi-language support provided valuable experience in internationalization, while working through complex responsive layout challenges deepened understanding of adaptive design principles and the importance of clear design-development communication.`,
   },
