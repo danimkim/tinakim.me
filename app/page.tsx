@@ -8,11 +8,7 @@ export default function Page() {
         {TITLE}
       </h1>
       <p className="mb-4">
-        {`I'm a Vim enthusiast and tab advocate, finding unmatched efficiency in
-        Vim's keystroke commands and tabs' flexibility for personal viewing
-        preferences. This extends to my support for static typing, where its
-        early error detection ensures cleaner code, and my preference for dark
-        mode, which eases long coding sessions by reducing eye strain.`}
+        {`I'm a frontend developer expanding into fullstack, focused on bridging user experience with developer experience. Passionate about translating real-world problems into clean and scalable technical solutions and empowering teams through documentation and knowledge sharing. Takes ownership of products from concept to delivery, proactively stepping up to tackle challenges. Collaborative by nature, I learn rapidly and communicate effectively to deliver results.`}
       </p>
       <div className="my-8">
         <BlogPosts />
