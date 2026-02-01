@@ -11,13 +11,13 @@ export function ProjectCard({ project }: ProjectCardProps) {
     return (
         <Link href={`/projects/${project.slug}`} className="group block">
             <article className="h-full border border-border overflow-hidden transition-colors hover:bg-muted">
-                <div className="relative aspect-[16/10] overflow-hidden bg-muted">
-                    <Image
-                        src={project.images[0] || "/placeholder.svg"}
+                <div className={`relative aspect-[16/10] overflow-hidden bg-muted ${project.images[0] ? '' : 'flex items-center justify-center'}`}>
+                    {project.images[0] ? <Image
+                        src={project.images[0]}
                         alt={project.title}
                         fill
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
+                    /> : <Image width={150} height={70} src={"/images/placeholder.svg"} alt={`Placeholder`} className="w-1/2 h-auto" />}
                 </div>
                 <div className="p-6">
                     <time className="text-sm text-muted-foreground">{project.date}</time>
