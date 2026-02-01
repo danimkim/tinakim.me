@@ -13,7 +13,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             <article className="h-full border border-border overflow-hidden transition-colors hover:bg-muted">
                 <div className="relative aspect-[16/10] overflow-hidden bg-muted">
                     <Image
-                        src={project.image || "/placeholder.svg"}
+                        src={project.images[0] || "/placeholder.svg"}
                         alt={project.title}
                         fill
                         className="object-cover transition-transform duration-300 group-hover:scale-105"

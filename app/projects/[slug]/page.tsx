@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { getProjectBySlug, getAllProjects } from "@/app/projects/utils"
+import { ImageCarousel } from "@/app/projects/_components/image-carousel"
 
 interface ProjectPageProps {
     params: Promise<{ slug: string }>
@@ -39,7 +40,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
     return (
         <main className="min-h-screen bg-background">
-            <article className="mx-auto max-w-2xl px-6 py-16">
+            <article className="mx-auto max-w-2xl px-6">
                 <header className="mb-12">
                     <Link
                         href="/projects"
@@ -59,6 +60,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
                         {project.description}
                     </p>
+
+                    <div className="mt-8">
+                        <ImageCarousel
+                            images={project.images}
+                            alt={project.title}
+                        />
+                    </div>
 
                     <div className="mt-6 flex flex-wrap gap-2">
                         {project.tags.map((tag) => (

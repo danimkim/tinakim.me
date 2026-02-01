@@ -5,7 +5,7 @@ export interface Project {
   date: string;
   tags: string[];
   content: string;
-  image: string;
+  images: string[];
 }
 
 export const projects: Project[] = [
@@ -16,7 +16,7 @@ export const projects: Project[] = [
       'A minimal portfolio website built with Next.js and Tailwind CSS featuring a clean black and white design.',
     date: 'January 2026',
     tags: ['Next.js', 'Tailwind CSS', 'TypeScript'],
-    image: '/images/portfolio-website.jpg',
+    images: ['/images/portfolio-website.jpg'],
     content: `This portfolio website showcases my work and projects in a clean, minimal design. Built with Next.js 14 and styled with Tailwind CSS, it features a responsive layout that works beautifully on all devices.
 
 Key features include:
@@ -35,7 +35,7 @@ The design philosophy focuses on content-first approach, letting the work speak 
       'A modern e-commerce platform for premium coffee machine brands featuring membership system and personalized shopping experience.',
     date: 'January 2023 - June 2023',
     tags: ['Next.js', 'TypeScript', 'Emotion', 'React Query'],
-    image: '/images/alacarte-mall.png',
+    images: ['/images/alacarte-mall.png'],
     content: `An e-commerce website for a premium coffee machine brand, built with Next.js and TypeScript. The project focused on delivering a seamless shopping experience with modern web technologies and performance optimization.
 
 Key features include:
@@ -58,7 +58,7 @@ The design approach was minimal and modern, allowing the premium coffee machines
       'A full-stack admin dashboard for managing e-commerce operations including products, orders, memberships, and automated membership tier management and benefits distribution.',
     date: 'January 2023 - August 2023',
     tags: ['Next.js', 'TypeScript', 'Emotion', 'Chart.js', 'Nest.js', 'MSSQL'],
-    image: '/images/alacarte-mall-admin.jpg',
+    images: ['/images/alacarte-mall-admin.jpg'],
     content: `A full-stack admin dashboard built for managing the Alacarte Mall e-commerce platform. The project involved both frontend development and backend API development, handling complex business operations including product management, order processing, and automated membership benefits distribution.
 
 Key features include:
@@ -82,7 +82,7 @@ Through code reviews and pair programming with team members, I learned the impor
       'A modern corporate website for HLI, a brand development company, featuring multi-language support and responsive design across multiple breakpoints.',
     date: 'June 2023 - July 2023',
     tags: ['Next.js', 'TypeScript', 'Emotion', 'i18n'],
-    image: '/images/hli.png',
+    images: ['/images/hli.png'],
     content: `A corporate website for HLI, a brand development company specializing in launching and growing premium brands in the Korean market. The site showcases the company's portfolio of brands including Alacarte, Jura, and Caso Design.
 
 Key features include:
@@ -104,7 +104,7 @@ Implementing i18n for multi-language support provided valuable experience in int
       'A restaurant website with table reservation system built with React and TypeScript, showcasing UI development skills and semantic HTML practices.',
     date: 'September 2024',
     tags: ['React', 'TypeScript', 'Emotion', 'Figma'],
-    image: '/images/little-lemon.jpg',
+    images: ['/images/little-lemon.jpg'],
     content: `A restaurant website developed as part of a Coursera course, demonstrating proficiency in modern React development and UI implementation. The project features a complete table reservation system with an intuitive user interface.
 
 Key features include:
@@ -126,7 +126,16 @@ This is a work-in-progress project with potential for future enhancements such a
       'A personal productivity web app that transforms bookmark collectors into action takers by turning saved social media inspiration into documented real-world experiences.',
     date: 'June 2025 - Present',
     tags: ['Next.js', 'TypeScript', 'Supabase'],
-    image: '/images/no-more-bookmarks.jpg',
+    images: [
+      '/images/no-more-bookmarks.png',
+      '/images/no-more-bookmarks_lg.png',
+      '/images/no-more-bookmarks_md.png',
+      '/images/no-more-bookmarks_sm.png',
+      '/images/no-more-bookmarks_feed.png',
+      '/images/no-more-bookmarks_sidebar.png',
+      '/images/no-more-bookmarks_signup.png',
+      '/images/no-more-bookmarks_post.png',
+    ],
     content: `A personal project born from the frustration of endlessly saving travel posts and recipes from Instagram and YouTube without ever actually experiencing them. This web app encourages users to move beyond passive bookmarking and start creating real-world memories.
 
 Key features include:
