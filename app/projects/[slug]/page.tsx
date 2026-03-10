@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { getProjectBySlug, getAllProjects } from "@/app/projects/utils"
 import { ImageCarousel } from "@/app/projects/_components/image-carousel"
+import { ScrollToTopButton } from "@/app/projects/_components/scroll-to-top-button"
 
 interface ProjectPageProps {
     params: Promise<{ slug: string }>
@@ -94,12 +95,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </div>
 
                 <footer className="mt-16 pt-8 border-t border-border">
-                    <Link
-                        href="/projects"
-                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                        ← View all projects
-                    </Link>
+                    <ScrollToTopButton />
                 </footer>
             </article>
         </main>
