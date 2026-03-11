@@ -1,0 +1,291 @@
+---
+title: 'The Complete Guide to HTML Script Tags: Part 2 — Script Positioning'
+publishedAt: '2025-05-03'
+summary: 'Script positioning in HTML is not just about organization — it\'s a critical performance factor. Use techniques like defer, DOMContentLoaded, ES6 type="module", and dynamic injection to optimize loading and keep your UI fast.'
+---
+
+## TL;DR
+
+Script positioning in HTML is not just about organization — it's a critical performance factor. Scripts in the `<head>` block rendering unless managed properly. Use techniques like defer, DOMContentLoaded, ES6 `type="module"`, and dynamic injection to optimize loading, preserve order, and keep your UI fast and responsive. This guide walks through each method with real-world examples and best practices.
+
+## Script Positioning: Where You Place It Matters
+
+The location of your `<script>` tags isn't just a matter of code organization—it fundamentally affects how quickly your users see and interact with your content.
+
+## Head vs. Body
+
+### When scripts are placed in the `<head>`:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <!-- Content appears after script loads -->
+  </body>
+</html>
+```
+
+**The issue:** The browser pauses HTML parsing until it downloads and executes the script, delaying the rendering of any content below. Your users might see a blank page while waiting for scripts to load!
+
+### When scripts are placed at the end of `<body>`:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- No blocking scripts here -->
+  </head>
+  <body>
+    <!-- Content loads first -->
+    <div id="content">Hello world!</div>
+    <!-- Scripts load last -->
+    <script src="app.js"></script>
+  </body>
+</html>
+```
+
+**The benefit:** HTML content renders first, giving users something to see while scripts load in the background.
+
+This explains why many performance optimization guides recommend placing scripts at the bottom of your HTML — but this approach has its own drawbacks, including potentially visible "jumps" as scripts modify the DOM after content is displayed.
+
+## Smart Script Loading: The Best of Both Worlds
+
+What if we could keep our scripts organized in the `<head>` (where they logically belong) without blocking page rendering? Here are five powerful techniques to achieve exactly that:
+
+### #1: The defer Attribute
+
+The `defer` attribute is the simplest and most effective solution for external scripts:
+
+```html
+<head>
+  <script src="script.js" defer></script>
+</head>
+```
+
+How it works:
+
+1. Browser discovers the script tag and downloads the script in parallel with HTML parsing
+2. HTML parsing continues uninterrupted (no blocking!)
+3. The script executes after the DOM is fully constructed
+4. Multiple deferred scripts execute in their original document order
+
+**Pro tip:** `defer` is perfect for your main application code that needs access to DOM elements.
+
+### #2: DOM Event Listeners
+
+Event listeners ensure your code executes at the right moment in the page lifecycle:
+
+```html
+<head>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // This code runs after DOM is ready but before images and stylesheets finish
+      console.log('DOM is ready for manipulation');
+      initializeApp();
+    });
+  </script>
+</head>
+```
+
+For even more certainty, you can wait for the complete page load:
+
+```html
+<head>
+  <script>
+    window.addEventListener('load', function () {
+      // This runs after ALL resources (images, CSS, iframes) have loaded
+      console.log('Page is fully loaded');
+      initializeAnalytics();
+    });
+  </script>
+</head>
+```
+
+### #3: Dynamic Script Injection
+
+This technique gives you programmatic control over when scripts load:
+
+```html
+<head>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Create the script element
+      const script = document.createElement('script');
+      script.src = 'heavy-functionality.js';
+      // Add it to the document
+      document.head.appendChild(script);
+    });
+  </script>
+</head>
+```
+
+The advantage: You can load scripts conditionally based on user interactions or other triggers, perfect for performance optimization patterns like lazy loading.
+
+### #4: ES6 Modules
+
+Modern JavaScript modules automatically defer execution:
+
+```html
+<head>
+  <script type="module" src="app.js"></script>
+</head>
+```
+
+What makes modules special:
+
+- They're automatically deferred (even inline module scripts!)
+- They maintain proper execution order
+- They have their own scope, preventing global namespace pollution
+- They enable a cleaner import/export architecture
+
+```js
+// Inside app.js (module)
+import { UserProfile } from './components/user-profile.js';
+import { api } from './services/api.js';
+
+// Initialize application
+document.addEventListener('DOMContentLoaded', () => {
+  const user = new UserProfile(api.getCurrentUser());
+  user.render('#profile-container');
+});
+```
+
+### #5: Async Scripts with Self-Checking
+
+For scripts that need to run as soon as possible but still need the DOM:
+
+```html
+<head>
+  <script src="critical-feature.js" async></script>
+</head>
+```
+
+With this pattern in your JavaScript file:
+
+```js
+// critical-feature.js
+(function () {
+  function initialize() {
+    console.log('Ready to initialize!');
+    // Your application logic here
+  }
+
+  // Check if DOM is already available
+  if (document.readyState === 'loading') {
+    // If not, wait for it
+    document.addEventListener('DOMContentLoaded', initialize);
+  } else {
+    // DOM is ready, run immediately
+    initialize();
+  }
+})();
+```
+
+## Which Approach Should You Choose?
+
+Each technique has its place in your web development toolkit.
+
+**My recommendation:**
+
+1. **For modern applications:** Embrace ES6 modules with `type="module"`
+2. **For inline code:** Use `DOMContentLoaded` listeners
+3. **For organized codebases:** Use `defer` for your main scripts in the `<head>`
+
+## Real-World Examples
+
+Let's look at some practical implementations of script loading patterns:
+
+### Loading Libraries from CDNs
+
+```html
+<!-- jQuery with SRI (Subresource Integrity) -->
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"
+  defer
+></script>
+
+<!-- Bootstrap with proper attributes -->
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+  crossorigin="anonymous"
+  defer
+></script>
+
+<!-- React production build -->
+<script
+  src="https://unpkg.com/react@17/umd/react.production.min.js"
+  crossorigin
+  defer
+></script>
+<script
+  src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"
+  crossorigin
+  defer
+></script>
+```
+
+**Security note:** Always use the `integrity` attribute with third-party CDNs to protect against compromised scripts.
+
+### Managing Multiple Script Dependencies
+
+When scripts depend on each other, proper loading order becomes crucial:
+
+```html
+<!-- Core utility functions needed by other scripts -->
+<script src="utilities.js" defer></script>
+<!-- Component library that depends on utilities -->
+<script src="components.js" defer></script>
+<!-- Main application that uses both utilities and components -->
+<script src="app.js" defer></script>
+```
+
+The `defer` attribute guarantees these scripts will execute in the exact order specified, even though they download in parallel.
+
+### Progressive Enhancement with Modules
+
+This pattern provides modern features to browsers that support them while maintaining compatibility:
+
+```html
+<!-- Modern browsers use this module version -->
+<script type="module" src="app.js"></script>
+<!-- Legacy browsers fall back to this bundled version -->
+<script nomodule src="app-bundle.js"></script>
+```
+
+In your module script:
+
+```js
+// app.js - Module version
+import { Router } from './router.js';
+import { Store } from './store.js';
+
+// Initialize application with modern features
+const app = {
+  router: new Router(),
+  store: new Store(),
+};
+app.router.initialize();
+```
+
+This approach lets you use modern JavaScript features while providing a fallback for older browsers.
+
+## Key Takeaways
+
+- **Security matters:** Always use `integrity` and `crossorigin` attributes with third-party scripts
+- **Embrace modern techniques:** ES6 modules provide better organization and automatic defer behavior
+- **Keep dependencies in order:** Ensure dependent scripts are listed in the correct sequence
+- **Defer is your friend:** Use the `defer` attribute to load scripts efficiently without blocking rendering
+- **Script positioning affects performance:** Where you place your scripts impacts how quickly users see your content
+
+With these techniques, you can organize your scripts logically in the `<head>` section while maintaining optimal page performance—truly the best of both worlds.
+
+<br />
+*Originally published on
+[Medium](https://medium.com/@valentinakim/the-complete-guide-to-html-script-tags-part-2-38427692ac6f)
+by [Tina Kim](https://medium.com/@valentinakim).*
