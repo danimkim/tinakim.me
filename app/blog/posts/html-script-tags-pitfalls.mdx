@@ -1,0 +1,173 @@
+---
+title: 'Common Pitfalls When Using HTML Script Tags (And How to Fix Them)'
+publishedAt: '2025-05-03'
+summary: 'Incorrect use of script tags can cause broken functionality, performance issues, and hard-to-debug errors. This guide covers the top 5 pitfalls and shows how to fix each one with practical solutions.'
+---
+
+## TL;DR
+
+Incorrect use of `<script>` tags can cause broken functionality, performance issues, and hard-to-debug errors. This guide covers the top 5 pitfalls — like dependency order problems, misuse of async and defer, mixing inline with external scripts, and module compatibility — and shows how to fix each one with practical, reliable solutions.
+
+## Pitfall #1: Dependency Order Issues
+
+One of the most common mistakes is loading scripts in the wrong order. When one script depends on another, the dependency must be loaded first.
+
+Here's what not to do:
+
+```html
+<!-- 🚫 PROBLEM: app.js depends on jQuery but loads first -->
+<script src="app.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+```
+
+If your `app.js` uses jQuery functions like `$()`, you'll encounter the dreaded `$ is not defined` error in your console.
+
+**The fix:** Always load dependencies before the scripts that need them:
+
+```html
+<!-- ✅ SOLUTION: jQuery loads before the code that needs it -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="app.js"></script>
+```
+
+## Pitfall #2: Misusing async and defer Attributes
+
+The `async` and `defer` attributes can dramatically improve page loading, but they're often misused.
+
+Here's a problematic implementation:
+
+```html
+<!-- 🚫 PROBLEM: Using async with dependent scripts -->
+<script src="utilities.js" async></script>
+<script src="app.js" async></script>
+<!-- app.js depends on utilities.js -->
+```
+
+With both scripts marked as `async`, they'll load in parallel and execute as soon as they're available. Since loading times vary, `app.js` might execute before `utilities.js` is ready, causing errors.
+
+**The fix:** Use `defer` for scripts that have dependencies:
+
+```html
+<!-- ✅ SOLUTION: defer maintains execution order -->
+<script src="utilities.js" defer></script>
+<script src="app.js" defer></script>
+```
+
+The `defer` attribute ensures scripts download in parallel but execute in the order they appear in the document, after the HTML is fully parsed.
+
+## Pitfall #3: Mixing Inline and External Scripts
+
+Another common issue arises when inline scripts try to use functions from external scripts that haven't finished loading.
+
+Consider this problematic code:
+
+```html
+<!-- 🚫 PROBLEM: Inline script runs before external script loads -->
+<script src="utilities.js"></script>
+<script>
+  // Attempting to use a function from utilities.js
+  formatDate(new Date()); // Uncaught ReferenceError: formatDate is not defined
+</script>
+```
+
+Even though `utilities.js` appears first, the browser doesn't guarantee it will finish loading before the inline script executes.
+
+**The fix:** Use event listeners to ensure your code runs at the right time:
+
+```html
+<!-- ✅ SOLUTION: Wait for the DOM to load -->
+<script src="utilities.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    formatDate(new Date()); // Now this works!
+  });
+</script>
+```
+
+For more certainty with external scripts, you could also use:
+
+```html
+<script src="utilities.js" onload="initializeApp()"></script>
+<script>
+  function initializeApp() {
+    formatDate(new Date());
+  }
+</script>
+```
+
+## Pitfall #4: Module and Regular Script Compatibility Issues
+
+JavaScript modules have their own scope, which can cause problems when mixing with traditional scripts.
+
+Here's what causes issues:
+
+```html
+<!-- 🚫 PROBLEM: Variables aren't shared between script types -->
+<script>
+  const apiKey = 'abc123';
+  // Set as a global variable (but not accessible to modules)
+</script>
+<script type="module" src="api-client.js"></script>
+<!-- api-client.js cannot access apiKey -->
+```
+
+**The fix:** Explicitly attach values to the global window object:
+
+```html
+<!-- ✅ SOLUTION: Use the window object for global access -->
+<script>
+  window.apiKey = 'abc123'; // Explicitly global
+</script>
+<script type="module" src="api-client.js"></script>
+<!-- Now api-client.js can access window.apiKey -->
+```
+
+## Pitfall #5: Cross-Origin Resource Handling
+
+When loading scripts from other domains, proper CORS (Cross-Origin Resource Sharing) attributes improve security and error handling.
+
+The problematic approach:
+
+```html
+<!-- 🚫 PROBLEM: Limited error information -->
+<script src="https://third-party-cdn.com/script.js"></script>
+```
+
+Without proper attributes, you'll receive limited error information if the external script fails.
+
+**The fix:** Add the `crossorigin` attribute:
+
+```html
+<!-- ✅ SOLUTION: Enable detailed error reporting -->
+<script
+  src="https://third-party-cdn.com/script.js"
+  crossorigin="anonymous"
+></script>
+```
+
+For additional security with CDN resources, include the `integrity` attribute:
+
+```html
+<script
+  src="https://third-party-cdn.com/script.js"
+  crossorigin="anonymous"
+  integrity="sha384-oqVuAfXRKap7fdgcCY5uykM6+R9GqQ8K/uxy9rx7HNQlGYl1kPzQho1wx4JwY8wC"
+></script>
+```
+
+## Key Takeaways
+
+The `<script>` tag may seem simple, but using it incorrectly can lead to frustrating bugs and performance issues. To ensure your scripts load efficiently and error-free:
+
+1. **Use async/defer strategically:** `defer` for scripts that need DOM access or have specific execution order; `async` for independent scripts
+2. **Mind your script order:** Load dependencies before the scripts that need them
+3. **Enhance security** with `integrity` and `crossorigin` attributes for third-party resources
+4. **Embrace modularity** with `type="module"` where appropriate
+5. **Manage dependencies carefully**, especially when mixing different script types
+
+By following these principles, you'll create web applications that load faster and encounter fewer unexpected errors. When refactoring legacy code, pay special attention to script tag implementation — it's often an easy win for both performance and reliability.
+
+<br />
+*Originally published on
+[Medium](https://medium.com/@valentinakim/common-pitfalls-when-using-html-script-tags-and-how-to-fix-them-e1f7ca0e404a)
+by [Tina Kim](https://medium.com/@valentinakim).*

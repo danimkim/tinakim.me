@@ -1,0 +1,187 @@
+---
+title: 'The Complete Guide to HTML Script Tags: Part 1'
+publishedAt: '2025-05-03'
+summary: 'The script tag is deceptively simple but can cause serious issues if used incorrectly. This guide covers what it is, how its attributes work (async, defer, module, etc.), and how to avoid common pitfalls like execution order bugs and cross-origin errors.'
+---
+
+## TL;DR
+
+The `<script>` tag is deceptively simple but can cause serious issues if used incorrectly. This guide covers what it is, how its attributes work (async, defer, module, etc.), and how to avoid common pitfalls like execution order bugs and cross-origin errors.
+
+## Why Script Tags Matter
+
+While refactoring legacy web projects, I've repeatedly encountered a common issue: HTML pages load external scripts and CDN resources with varying degrees of success. Sometimes scripts work perfectly, other times they get overwritten by other scripts, leading to mysterious bugs and frustrating debugging sessions.
+
+The culprit? Improper implementation of the humble `<script>` tag.
+
+In this comprehensive guide, we'll dive into everything you need to know about script tags: what they are, their key attributes, and how to implement them properly to avoid performance issues and unintended behaviors.
+
+## The Basics: What is a `<script>` Tag?
+
+The `<script>` tag is an HTML element that embeds or references JavaScript code within a web page. When a browser encounters this tag during page rendering, it pauses to interpret and execute the associated JavaScript.
+
+There are two primary ways to use script tags:
+
+### 1. Inline Scripts
+
+With inline scripts, you write JavaScript code directly within your HTML document:
+
+```html
+<script>
+  // JavaScript code goes here
+  console.log('Hello, World!');
+  document.getElementById('demo').innerHTML = 'JavaScript has been executed!';
+</script>
+```
+
+Inline scripts are convenient for small, page-specific functionality but can make your HTML cluttered and difficult to maintain as your application grows.
+
+### 2. External Scripts
+
+External scripts reference separate JavaScript files:
+
+```html
+<script src="script.js"></script>
+```
+
+This approach promotes better code organization, caching, and separation of concerns — generally the preferred method for production applications.
+
+## Understanding Script Tag Attributes
+
+The power of the `<script>` tag comes from its various attributes that control how and when scripts load. Let's explore each one:
+
+### src
+
+The `src` attribute specifies the URL of an external JavaScript file:
+
+```html
+<script src="https://cdn.example.com/script.js"></script>
+```
+
+This attribute can point to:
+
+- Scripts on other domains (subject to CORS policies)
+- Scripts hosted on CDNs (Content Delivery Networks)
+- Local files in your project directory
+
+### type
+
+The `type` attribute specifies the MIME type of the script. In modern HTML5, this attribute is optional for standard JavaScript, as browsers default to "text/javascript".
+
+However, when using ES6 modules, you should specify `type="module"`:
+
+```html
+<script type="module" src="app.js"></script>
+```
+
+Using `type="module"` enables features like:
+
+- Scoped variables that don't pollute the global namespace
+- Deferred execution by default
+- Automatic strict mode
+- ES6 import/export statements
+
+### async
+
+The `async` attribute is a boolean that tells the browser to download the script asynchronously while HTML parsing continues:
+
+```html
+<script src="analytics.js" async></script>
+```
+
+How it works:
+
+1. Browser discovers the script tag
+2. Downloads the script in parallel with HTML parsing
+3. Once downloaded, immediately executes the script (interrupting HTML parsing)
+4. Resumes HTML parsing after execution
+
+Best for:
+
+- Independent functionality that doesn't rely on DOM elements
+- Analytics, tracking, and metrics tools
+- Third-party scripts that don't interact with your page content
+
+**Watch out:** Scripts with `async` execute as soon as they download, without guaranteeing execution order. If script B depends on script A, they might not execute in the correct sequence.
+
+### defer
+
+The `defer` attribute downloads scripts asynchronously but delays execution until after HTML parsing is complete:
+
+```html
+<script src="main.js" defer></script>
+```
+
+How it works:
+
+1. Browser discovers the script tag
+2. Downloads the script in parallel with HTML parsing
+3. Completes HTML parsing first
+4. Executes deferred scripts in the order they appear in the document
+
+Best for:
+
+- Your main application code
+- Scripts with dependencies on other scripts
+- Scripts that manipulate DOM elements
+
+**Pro tip:** Multiple deferred scripts maintain their original document order during execution, making this perfect for scripts with dependencies.
+
+### crossorigin
+
+The `crossorigin` attribute configures CORS (Cross-Origin Resource Sharing) settings for scripts loaded from different domains:
+
+```html
+<script
+  src="https://cdn.example.com/script.js"
+  crossorigin="anonymous"
+></script>
+```
+
+Available values:
+
+- `use-credentials`: Includes credentials with cross-origin requests
+- `anonymous`: Sends requests without credentials (cookies, HTTP authentication)
+
+Why it matters: Without proper CORS settings, you get limited error reporting for cross-origin scripts and potential security issues.
+
+### integrity
+
+The `integrity` attribute provides a cryptographic hash of the expected file content:
+
+```html
+<script
+  src="https://cdn.example.com/library.js"
+  integrity="sha384-oqVuAfXRKap7fdgcCY5uykM6+R9GqQ8K/uxy9rx7HNQlGYl1kPzQho1wx4JwY8wC"
+  crossorigin="anonymous"
+></script>
+```
+
+How it works:
+
+1. You provide a hash (typically SHA-384 or SHA-512)
+2. The browser downloads the script
+3. Browser calculates the actual hash of the downloaded file
+4. If the hashes don't match, the script won't execute
+
+This feature, known as Subresource Integrity (SRI), prevents execution of modified scripts — crucial protection if a CDN gets compromised.
+
+### nomodule
+
+The `nomodule` attribute creates a fallback for browsers that don't support ES6 modules:
+
+```html
+<!-- Modern browsers use this -->
+<script type="module" src="modern-script.js"></script>
+<!-- Legacy browsers fall back to this -->
+<script nomodule src="legacy-script.js"></script>
+```
+
+Modern browsers that support modules will ignore scripts with the `nomodule` attribute, while older browsers will ignore scripts with `type="module"` and execute the `nomodule` script instead.
+
+This pattern enables graceful degradation across browser generations.
+
+<br />
+_Originally published on
+[Medium](https://medium.com/@valentinakim/the-complete-guide-to-html-script-tags-best-practices-and-precautions-b3cd42ae12e7)
+by [Tina Kim](https://medium.com/@valentinakim)._
