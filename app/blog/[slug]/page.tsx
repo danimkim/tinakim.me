@@ -1,7 +1,9 @@
 import { notFound } from 'next/navigation'
+import Link from 'next/link'
 import { CustomMDX } from '@/components/mdx'
 import { formatDate, getBlogPosts } from 'app/blog/utils'
 import { baseUrl } from 'app/sitemap'
+import { ScrollToTopButton } from '@/app/projects/_components/scroll-to-top-button'
 
 interface BlogPageProps {
   params: Promise<{ slug: string }>
@@ -89,7 +91,13 @@ export default async function Blog({ params }) {
           }),
         }}
       />
-      <h1 className="title font-semibold text-2xl tracking-tighter">
+      <Link
+        href="/blog"
+        className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+      >
+        ← Back to posts
+      </Link>
+      <h1 className="title font-semibold text-2xl tracking-tighter mt-6">
         {post.metadata.title}
       </h1>
       <div className="flex justify-between items-center mt-2 mb-8 text-sm">
@@ -100,6 +108,9 @@ export default async function Blog({ params }) {
       <article className="prose">
         <CustomMDX source={post.content} />
       </article>
+      <div className="mt-8">
+        <ScrollToTopButton />
+      </div>
     </section>
   )
 }
