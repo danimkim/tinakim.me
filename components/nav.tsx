@@ -1,6 +1,14 @@
 import Link from 'next/link'
+import { GOOGLE_DOCS_CV_ID } from './../constants'
 
-const navItems = {
+type TNavItems = {
+  [key: string]: {
+    name: string,
+    external?: boolean
+  }
+}
+
+const navItems: TNavItems = {
   '/': {
     name: 'home',
   },
@@ -10,6 +18,11 @@ const navItems = {
   '/projects': {
     name: 'projects',
   },
+  '/cv': {
+    name: 'cv',
+    external: true
+
+  }
 };
 
 export function Navbar() {
@@ -21,11 +34,13 @@ export function Navbar() {
           id="nav"
         >
           <div className="flex flex-row space-x-0 pr-10">
-            {Object.entries(navItems).map(([path, { name }]) => {
+            {Object.entries(navItems).map(([path, { name, external }]) => {
               return (
                 <Link
                   key={path}
-                  href={path}
+                  href={name === 'cv' ? GOOGLE_DOCS_CV_ID : path}
+                  target={external ? '_blank' : undefined}
+                  rel={external ? 'noopener noreferrer' : undefined}
                   className="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative py-1 px-2 m-1"
                 >
                   {name}
